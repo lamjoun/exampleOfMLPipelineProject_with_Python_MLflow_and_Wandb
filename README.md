@@ -1,3 +1,44 @@
+
+# Introduction
+
+The [objective](#test) of the project is to become familiar with MLflow, Hydra and W&B technologies in a Python context. So, it was asked to complete the different stages of the process of building a pipeline which generates prediction models for Short-Term Rental prices in NYC. For more details, please see the beginning of the section [Project Pipeline Instructions](#project-pipeline-instructions). Section that dictates what needs to be done to complete the various tasks. Before moving forward we recall our project links:
+<br>
+<h4>GitHub: https://github.com/lamjoun/exampleOfMLPipelineProject_with_Python_MLflow_and_Wandb</h4>
+<h4>W&B: https://wandb.ai/rlamjoun/nyc_airbnb?workspace=user-rlamjoun</h4>
+<br>
+
+We are not going to explain in detail our execution of what is asked to be done, but rather to address a few points that we think are useful to remember:
+
+* Using Git-Bash on Windows10: <br>
+After several tests with different versions of the libraries, we have noticed that there are operations that work while others do not. What pushed us to abandon this solution and we turned to the Ubuntu system.
+
+* Installing Ubuntu 20.04.4-desktop-amd64 through VirtualBox: <br>
+With this version of this system we were able to complete the project except for one detail. We encountered a problem in the conda environment build phase when launching mlflow. The resolution has been discussed in the next point.
+
+* Problem in building the conda env for mlflow: <br>
+The error message is as follows:
+```
+from wandb.proto import wandb_telemetry_pb2 as wandb_dot_proto_dot_wandb__telemetry__pb2
+  File "/home/user/miniconda3/envs/mlflow-2d74a3fe5b739a35fe7fa1f1025c70c15ecfe41c/lib/python3.9/site-packages/wandb/proto/wandb_telemetry_pb2.py", line 34, in <module>
+    _descriptor.FieldDescriptor(
+  File "/home/user/miniconda3/envs/mlflow-2d74a3fe5b739a35fe7fa1f1025c70c15ecfe41c/lib/python3.9/site-packages/google/protobuf/descriptor.py", line 560, in __new__
+    _message.Message._CheckCalledFromGeneratedFile()
+TypeError: Descriptors cannot not be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
+If you cannot immediately regenerate your protos, some other possible workarounds are:
+ 1. Downgrade the protobuf package to 3.20.x or lower.
+ 2. Set PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python (but this will use pure-Python parsing and will be much slower).
+```
+We were able to avoid the error by using wandb version 0.13.2 instead of 0.10.31
+
+* discussion for eventual release: <br>
+We can imagine another release that implements other machine learning algorithms. The ideal is that the loading is done dynamically of the algorithms and its configuration.
+Another interesting possibility is to use Optuna Sweeper plugin for the optimization of parameters in the search for the best models.
+<br><br>
+
+
+# Project Pipeline Instructions
+
 # Build an ML Pipeline for Short-Term Rental Prices in NYC
 You are working for a property management company renting rooms and properties for short periods of 
 time on various rental platforms. You need to estimate the typical price for a given property based 
